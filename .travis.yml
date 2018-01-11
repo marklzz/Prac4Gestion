@@ -15,16 +15,14 @@ script:
 #las variables de entorno para los credenciales de acceso a DockerHub las
 #creamos en travs-ci.org
 after_success:
-- cp $TRAVIS_BUILD_DIR/src/Clients/build/libs/*.war
-$TRAVIS_BUILD_DIR/deploy/docker/Clients/drop/ # misma línea que la anterior
+- cp $TRAVIS_BUILD_DIR/src/Clients/build/libs/*.war $TRAVIS_BUILD_DIR/deploy/docker/Clients/drop/ # misma línea que la anterior
 - docker login -e $DOCKER_EMAIL -u $DOCKER_USER -p $DOCKER_PASS
 - export REPO=p4gps
 - export TAG=web
 - docker build -t $REPO/$TAG $TRAVIS_BUILD_DIR/deploy/docker/Clients
 - docker tag $REPO/$TAG $DOCKER_USER/$REPO:$TAG
 - docker push $DOCKER_USER/$REPO:$TAG
-- cp $TRAVIS_BUILD_DIR/src/Backend/OrderService/build/libs/ordering*
-$TRAVIS_BUILD_DIR/deploy/docker/Order/drop/ # misma línea que la anterior
+- cp $TRAVIS_BUILD_DIR/src/Backend/OrderService/build/libs/ordering* $TRAVIS_BUILD_DIR/deploy/docker/Order/drop/ # misma línea que la anterior
 - export TAG=order
 - docker build -t $REPO/$TAG $TRAVIS_BUILD_DIR/deploy/docker/Order
 - docker tag $REPO/$TAG $DOCKER_USER/$REPO:$TAG
