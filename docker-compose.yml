@@ -4,7 +4,7 @@ services:
 # Por ejemplo, mongo debe estar antes de order.
 mongo: #este es el mismo nombre usado en el run.sh de Order, y el
 #application.properties, se resuelve en una dirección IP
-image: paberlo/p4gps:db
+image: marklzz/prac4gestion:db
 deploy:
 replicas: 1 # para escabilidad del servicio.
 resources:
@@ -20,7 +20,7 @@ ports:
 volumes:
 - "db-data:/data/db" # para dar persistencia a la sesión
 order:
-image: paberlo/p4gps:order
+image: marklzz/prac4gestion:order
 depends_on:
 - "mongo" #le psamos al servicio order la ip del servicio mongo
 deploy:
@@ -32,8 +32,8 @@ memory: 300M
 restart_policy:
 condition: on-failure
 ports:
-  web:
-image: paberlo/p4gps:web
+web:
+image: marklzz/prac4gestion:web
 deploy:
 replicas: 1
 resources:

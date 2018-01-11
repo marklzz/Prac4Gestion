@@ -1,7 +1,7 @@
 language: java
 jdk: oraclejdk8
 before_script:
-  - chmod  +x  $TRAVIS_BUILD_DIR/src/Backend/IntegrationService/gradlew
+  - chmod +x  $TRAVIS_BUILD_DIR/src/Backend/IntegrationService/gradlew
   - chmod +x  $TRAVIS_BUILD_DIR/src/Backend/OrderService/gradlew
   - chmod +x  $TRAVIS_BUILD_DIR/src/Clients/gradlew
 script: 
@@ -17,7 +17,7 @@ script:
 after_success:
 - cp $TRAVIS_BUILD_DIR/src/Clients/build/libs/*.war $TRAVIS_BUILD_DIR/deploy/docker/Clients/drop/ # misma línea que la anterior
 - docker login -e $DOCKER_EMAIL -u $DOCKER_USER -p $DOCKER_PASS
-- export REPO=p4gps
+- export REPO=prac4gestion
 - export TAG=web
 - docker build -t $REPO/$TAG $TRAVIS_BUILD_DIR/deploy/docker/Clients
 - docker tag $REPO/$TAG $DOCKER_USER/$REPO:$TAG
