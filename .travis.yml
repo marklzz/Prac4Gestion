@@ -16,7 +16,7 @@ script:
 #creamos en travs-ci.org
 after_success:
 - cp $TRAVIS_BUILD_DIR/src/Clients/build/libs/*.war $TRAVIS_BUILD_DIR/deploy/docker/Clients/drop/ # misma línea que la anterior
-- docker login -e $DOCKER_EMAIL -u $DOCKER_USER -p $DOCKER_PASS
+- docker login -u $DOCKER_USER -p $DOCKER_PASS
 - export REPO=prac4gestion
 - export TAG=web
 - docker build -t $REPO/$TAG $TRAVIS_BUILD_DIR/deploy/docker/Clients
